@@ -11,8 +11,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  AndroidNotificationListener _notifications;
-  StreamSubscription<NotifierListenerEvent> _subscription;
+  late AndroidNotificationListener _notifications;
+  late StreamSubscription<NotifierListenerEvent> _subscription;
   List<NotifierListenerEvent> notifications = [];
 
   @override
@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
     });
     _notifications = new AndroidNotificationListener();
     try {
-      _subscription = _notifications.notificationStream.listen(onData);
+      _subscription = _notifications.notificationStream!.listen(onData);
     } on NotifierListener catch (exception) {
       print(exception);
     }
@@ -58,21 +58,26 @@ class _MyAppState extends State<MyApp> {
         ),
         body: ListView.separated(
             itemBuilder: (BuildContext context, int index) {
-              NotifierListenerEvent notifierListenerEvent = notifications[index];
+              NotifierListenerEvent notifierListenerEvent =
+                  notifications[index];
               return ListTile(
                   // leading: PackageIcon(
                   //   package: NotifierListenerEvent.packageName,
                   // ),
-                  title: Text(notifierListenerEvent.packageMessage),
+                  title: Text(notifierListenerEvent.packageMessage!),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Text(notifierListenerEvent.packageText, style: TextStyle(fontWeight: FontWeight.w200, color: Colors.red[400])),
+                      Text(notifierListenerEvent.packageText!,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w200,
+                              color: Colors.red[400])),
                       Text(
-                        notifierListenerEvent.packageName,
+                        notifierListenerEvent.packageName!,
                         maxLines: 1,
                         softWrap: true,
-                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.green),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.green),
                       ),
                     ],
                   )
@@ -97,7 +102,7 @@ class _MyAppState extends State<MyApp> {
 
 class PackageIcon extends StatelessWidget {
   final package;
-  const PackageIcon({Key key, this.package}) : super(key: key);
+  const PackageIcon({Key? key, this.package}) : super(key: key);
 
   buildPackageWidget() async {
     // Application app = await DeviceApps.getApp(package);
