@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 // import 'package:device_apps/device_apps.dart';
 import 'package:notifier_listener/notifier_listener.dart';
+import 'package:print_color/print_color.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,6 +30,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   void onData(NotifierListenerEvent event) {
+    Print.green(event.packageName);
     setState(() {
       notifications.add(event);
     });
@@ -41,7 +45,10 @@ class _MyAppState extends State<MyApp> {
     try {
       _subscription = _notifications.notificationStream!.listen(onData);
     } on NotifierListener catch (exception) {
+      Print.red(exception);
       print(exception);
+    } catch (e) {
+      Print.red(e);
     }
   }
 
