@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.notifierlistener.notifier_listener_example">
    <application
+        android:name="${applicationName}"
         android:label="notifier_listener_example"
         android:icon="@mipmap/ic_launcher">
         <service android:name="com.notifierlistener.notifier_listener.NotificationListener"

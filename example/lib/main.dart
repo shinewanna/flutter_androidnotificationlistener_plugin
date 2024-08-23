@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'dart:async';
-// import 'package:device_apps/device_apps.dart';
 import 'package:notifier_listener/notifier_listener.dart';
 import 'package:print_color/print_color.dart';
 
